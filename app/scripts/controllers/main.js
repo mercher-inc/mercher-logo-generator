@@ -19,73 +19,98 @@ angular.module('mercherLogoGeneratorApp')
 
     $scope.showLines = true;
 
-    var createLine = function() {
-      return [
-        {x: 0, y: 0},
-        {x: 0, y: 0}
-      ];
-    };
+    function Line(A, B, C) {
+      this.A = A;
+      this.B = B;
+      this.C = C;
+
+      this.x1 = function() {
+        if (!this.A) {
+          if (this.B > 0) {
+            return 0;
+          } else {
+            return $scope.size;
+          }
+        } else if (!this.B) {
+          return - (this.B * this.y1() + this.C) / this.A;
+        } else {
+
+        }
+      };
+
+      this.y1 = function() {
+        if (!this.A) {
+          return - (this.A * this.x1() + this.C) / this.B;
+        } else if (!this.B) {
+          if (this.A > 0) {
+            return 0;
+          } else {
+            return $scope.size;
+          }
+        } else {
+
+        }
+      };
+
+      this.x2 = function() {
+        if (!this.A) {
+          if (this.B > 0) {
+            return $scope.size;
+          } else {
+            return 0;
+          }
+        } else if (!this.B) {
+          return - (this.B * this.y2() + this.C) / this.A;
+        } else {
+
+        }
+      };
+
+      this.y2 = function() {
+        if (!this.A) {
+          return - (this.A * this.x2() + this.C) / this.B;
+        } else if (!this.B) {
+          if (this.A > 0) {
+            return $scope.size;
+          } else {
+            return 0;
+          }
+        } else {
+
+        }
+      };
+    }
+
+    var
+      leftLine = new Line(1, 0, 0),
+      left2Line = new Line(-1, 0, $scope.lineWidth),
+      left3Line = new Line(-1, 0, $scope.lineWidth + $scope.linePadding),
+      left4Line = new Line(-1, 0, $scope.lineWidth * 2 + $scope.linePadding),
+      left5Line = new Line(-1, 0, $scope.lineWidth * 2 + $scope.linePadding * 2),
+      rightLine = new Line(-1, 0, $scope.size),
+      right2Line = new Line(-1, 0, $scope.size - $scope.lineWidth),
+      right3Line = new Line(-1, 0, $scope.size - $scope.lineWidth - $scope.linePadding),
+      right4Line = new Line(-1, 0, $scope.size - $scope.lineWidth * 2 - $scope.linePadding),
+      right5Line = new Line(-1, 0, $scope.size - $scope.lineWidth * 2 - $scope.linePadding * 2),
+      topLine = new Line(0, 1, 0),
+      bottomLine = new Line(0, -1, $scope.size);
 
     $scope.lines = [
-      createLine(), //left
-      createLine(), //right
-      createLine(), //left center
-      createLine(), //right center
-      createLine(),
-      createLine(),
-      createLine(),
-      createLine()
+      leftLine,
+      left2Line,
+      left3Line,
+      left4Line,
+      left5Line,
+      rightLine,
+      right2Line,
+      right3Line,
+      right4Line,
+      right5Line,
+      topLine,
+      bottomLine
     ];
 
-    $scope.calculateLines = function(){
-      var left1 = $scope.lines[0],
-        left2 = $scope.lines[1],
-        left3 = $scope.lines[2],
-        left4 = $scope.lines[3],
-        right1 = $scope.lines[4],
-        right2 = $scope.lines[5],
-        right3 = $scope.lines[6],
-        right4 = $scope.lines[7];
-
-      left1[0].x = 0;
-      left1[0].y = 0;
-      left1[1].x = 0;
-      left1[1].y = $scope.size;
-
-      left2[0].x = $scope.lineWidth;
-      left2[0].y = 0;
-      left2[1].x = $scope.lineWidth;
-      left2[1].y = $scope.size;
-
-      left3[0].x = $scope.lineWidth + $scope.linePadding;
-      left3[0].y = 0;
-      left3[1].x = $scope.lineWidth + $scope.linePadding;
-      left3[1].y = $scope.size;
-
-      left4[0].x = $scope.lineWidth * 2 + $scope.linePadding;
-      left4[0].y = 0;
-      left4[1].x = $scope.lineWidth * 2 + $scope.linePadding;
-      left4[1].y = $scope.size;
-
-      right1[0].x = $scope.size;
-      right1[0].y = 0;
-      right1[1].x = $scope.size;
-      right1[1].y = $scope.size;
-
-      right2[0].x = $scope.size - $scope.lineWidth;
-      right2[0].y = 0;
-      right2[1].x = $scope.size - $scope.lineWidth;
-      right2[1].y = $scope.size;
-
-      right3[0].x = $scope.size - $scope.lineWidth - $scope.linePadding;
-      right3[0].y = 0;
-      right3[1].x = $scope.size - $scope.lineWidth - $scope.linePadding;
-      right3[1].y = $scope.size;
-
-      right4[0].x = $scope.size - $scope.lineWidth * 2 - $scope.linePadding;
-      right4[0].y = 0;
-      right4[1].x = $scope.size - $scope.lineWidth * 2 - $scope.linePadding;
-      right4[1].y = $scope.size;
+    $scope.calculateLines = function () {
     };
 
     $scope.$watch('size', function () {

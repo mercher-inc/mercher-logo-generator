@@ -48,7 +48,7 @@
         </form>
     </div>
     <div class="col-md-8">
-        <svg width="{{ size }}px" height="{{ size }}px" id="resultImage">
+        <svg width="{{ size }}" height="{{ size }}" id="resultImage">
             <g fill="{{ color1 }}">
 
             </g>
@@ -56,7 +56,7 @@
 
             </g>
             <g stroke="red" stroke-width="1px" ng-if="showLines">
-                <line ng-repeat="line in lines" x1="{{ line[0].x }}" x2="{{ line[1].x }}" y1="{{ line[0].y }}" y2="{{ line[1].y }}" />
+                <line ng-repeat="line in lines" x1="{{ line.x1() }}" x2="{{ line.x2() }}" y1="{{ line.y1() }}" y2="{{ line.y2() }}" />
             </g>
         </svg>
     </div>
