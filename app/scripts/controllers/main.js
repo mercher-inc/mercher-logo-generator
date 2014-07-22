@@ -100,7 +100,14 @@ angular.module('mercherLogoGeneratorApp')
       topLeft2Line = new Line(Math.cos(Math.PI/180 * $scope.base.angle), Math.sin(Math.PI/180 * $scope.base.angle), $scope.base.width),
       topLeft3Line = new Line(Math.cos(Math.PI/180 * $scope.base.angle), Math.sin(Math.PI/180 * $scope.base.angle), $scope.base.width + $scope.base.padding),
       topLeft4Line = new Line(Math.cos(Math.PI/180 * $scope.base.angle), Math.sin(Math.PI/180 * $scope.base.angle), $scope.base.width * 2 + $scope.base.padding),
-      topLeft5Line = new Line(Math.cos(Math.PI/180 * $scope.base.angle), Math.sin(Math.PI/180 * $scope.base.angle), $scope.base.width * 2 + $scope.base.padding * 2);
+      topLeft5Line = new Line(Math.cos(Math.PI/180 * $scope.base.angle), Math.sin(Math.PI/180 * $scope.base.angle), $scope.base.width * 2 + $scope.base.padding * 2),
+      rtA = Math.cos(Math.PI/180 * (-$scope.base.angle)),
+      rtB = Math.sin(Math.PI/180 * (-$scope.base.angle)),
+      topRightLine = new Line(rtA, rtB, - $scope.base.size * rtA),
+      topRight2Line = new Line(rtA, rtB, - $scope.base.size * rtA - $scope.base.width),
+      topRight3Line = new Line(rtA, rtB, - $scope.base.size * rtA - $scope.base.width - $scope.base.padding),
+      topRight4Line = new Line(rtA, rtB, - $scope.base.size * rtA - $scope.base.width * 2 - $scope.base.padding),
+      topRight5Line = new Line(rtA, rtB, - $scope.base.size * rtA - $scope.base.width * 2 - $scope.base.padding * 2);
 
     $scope.lines = [
       leftLine,
@@ -119,7 +126,12 @@ angular.module('mercherLogoGeneratorApp')
       topLeft2Line,
       topLeft3Line,
       topLeft4Line,
-      topLeft5Line
+      topLeft5Line,
+      topRightLine,
+      topRight2Line,
+      topRight3Line,
+      topRight4Line,
+      topRight5Line
     ];
 
     $scope.$watchCollection('base', function () {
@@ -136,6 +148,16 @@ angular.module('mercherLogoGeneratorApp')
       bottomLine.C = $scope.base.size;
       topLeftLine.A = topLeft2Line.A = topLeft3Line.A = topLeft4Line.A = topLeft5Line.A = Math.cos(Math.PI/180 * $scope.base.angle);
       topLeftLine.B = topLeft2Line.B = topLeft3Line.B = topLeft4Line.B = topLeft5Line.B = Math.sin(Math.PI/180 * $scope.base.angle);
+
+      rtA = Math.cos(Math.PI/180 * (-$scope.base.angle));
+      rtB = Math.sin(Math.PI/180 * (-$scope.base.angle));
+      topRightLine.A = topRight2Line.A = topRight3Line.A = topRight4Line.A = topRight5Line.A = rtA;
+      topRightLine.B = topRight2Line.B = topRight3Line.B = topRight4Line.B = topRight5Line.B = rtB;
+      topRightLine.C = - $scope.base.size * rtA;
+      topRight2Line.C = - $scope.base.size * rtA - $scope.base.width;
+      topRight3Line.C = - $scope.base.size * rtA - $scope.base.width - $scope.base.padding;
+      topRight4Line.C = - $scope.base.size * rtA - $scope.base.width * 2 - $scope.base.padding;
+      topRight5Line.C = - $scope.base.size * rtA - $scope.base.width * 2 - $scope.base.padding * 2;
     });
 
   });
