@@ -9,10 +9,12 @@
  */
 angular.module('mercherLogoGeneratorApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.size = 512;
-    $scope.angle = 50;
-    $scope.lineWidth = 64;
-    $scope.linePadding = 8;
+    $scope.base = {
+      size: 512,
+      angle: 50,
+      width: 64,
+      padding: 8
+    };
 
     $scope.color1 = '#1E8A8E';
     $scope.color2 = '#C5C5C5';
@@ -29,7 +31,7 @@ angular.module('mercherLogoGeneratorApp')
           if (this.B > 0) {
             return 0;
           } else {
-            return $scope.size;
+            return $scope.base.size;
           }
         } else if (!this.B) {
           return - (this.B * this.y1() + this.C) / this.A;
@@ -45,7 +47,7 @@ angular.module('mercherLogoGeneratorApp')
           if (this.A > 0) {
             return 0;
           } else {
-            return $scope.size;
+            return $scope.base.size;
           }
         } else {
 
@@ -55,7 +57,7 @@ angular.module('mercherLogoGeneratorApp')
       this.x2 = function() {
         if (!this.A) {
           if (this.B > 0) {
-            return $scope.size;
+            return $scope.base.size;
           } else {
             return 0;
           }
@@ -71,7 +73,7 @@ angular.module('mercherLogoGeneratorApp')
           return - (this.A * this.x2() + this.C) / this.B;
         } else if (!this.B) {
           if (this.A > 0) {
-            return $scope.size;
+            return $scope.base.size;
           } else {
             return 0;
           }
@@ -83,17 +85,17 @@ angular.module('mercherLogoGeneratorApp')
 
     var
       leftLine = new Line(1, 0, 0),
-      left2Line = new Line(-1, 0, $scope.lineWidth),
-      left3Line = new Line(-1, 0, $scope.lineWidth + $scope.linePadding),
-      left4Line = new Line(-1, 0, $scope.lineWidth * 2 + $scope.linePadding),
-      left5Line = new Line(-1, 0, $scope.lineWidth * 2 + $scope.linePadding * 2),
-      rightLine = new Line(-1, 0, $scope.size),
-      right2Line = new Line(-1, 0, $scope.size - $scope.lineWidth),
-      right3Line = new Line(-1, 0, $scope.size - $scope.lineWidth - $scope.linePadding),
-      right4Line = new Line(-1, 0, $scope.size - $scope.lineWidth * 2 - $scope.linePadding),
-      right5Line = new Line(-1, 0, $scope.size - $scope.lineWidth * 2 - $scope.linePadding * 2),
+      left2Line = new Line(-1, 0, $scope.base.width),
+      left3Line = new Line(-1, 0, $scope.base.width + $scope.base.padding),
+      left4Line = new Line(-1, 0, $scope.base.width * 2 + $scope.base.padding),
+      left5Line = new Line(-1, 0, $scope.base.width * 2 + $scope.base.padding * 2),
+      rightLine = new Line(-1, 0, $scope.base.size),
+      right2Line = new Line(-1, 0, $scope.base.size - $scope.base.width),
+      right3Line = new Line(-1, 0, $scope.base.size - $scope.base.width - $scope.base.padding),
+      right4Line = new Line(-1, 0, $scope.base.size - $scope.base.width * 2 - $scope.base.padding),
+      right5Line = new Line(-1, 0, $scope.base.size - $scope.base.width * 2 - $scope.base.padding * 2),
       topLine = new Line(0, 1, 0),
-      bottomLine = new Line(0, -1, $scope.size);
+      bottomLine = new Line(0, -1, $scope.base.size);
 
     $scope.lines = [
       leftLine,
@@ -110,23 +112,18 @@ angular.module('mercherLogoGeneratorApp')
       bottomLine
     ];
 
-    $scope.calculateLines = function () {
-    };
-
-    $scope.$watch('size', function () {
-      $scope.calculateLines();
-    });
-
-    $scope.$watch('angle', function () {
-      $scope.calculateLines();
-    });
-
-    $scope.$watch('lineWidth', function () {
-      $scope.calculateLines();
-    });
-
-    $scope.$watch('linePadding', function () {
-      $scope.calculateLines();
+    $scope.$watchCollection('base', function () {
+      console.log($scope.base);
+      left2Line.C = $scope.base.width;
+      left3Line.C = $scope.base.width + $scope.base.padding;
+      left4Line.C = $scope.base.width * 2 + $scope.base.padding;
+      left5Line.C = $scope.base.width * 2 + $scope.base.padding * 2;
+      rightLine.C = $scope.base.size;
+      right2Line.C = $scope.base.size - $scope.base.width;
+      right3Line.C = $scope.base.size - $scope.base.width - $scope.base.padding;
+      right4Line.C = $scope.base.size - $scope.base.width * 2 - $scope.base.padding;
+      right5Line.C = $scope.base.size - $scope.base.width * 2 - $scope.base.padding * 2;
+      bottomLine.C = $scope.base.size;
     });
 
   });
