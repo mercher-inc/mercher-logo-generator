@@ -19,7 +19,7 @@ angular.module('mercherLogoGeneratorApp')
     $scope.color1 = '#1E8A8E';
     $scope.color2 = '#C5C5C5';
 
-    $scope.showLines = true;
+    $scope.showLines = false;
     $scope.variant = 1;
 
     function Line(A, B, C) {
