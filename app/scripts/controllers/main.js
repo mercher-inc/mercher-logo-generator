@@ -13,7 +13,7 @@ angular.module('mercherLogoGeneratorApp')
       size: 512,
       angle: 50,
       width: 64,
-      padding: 8
+      padding: 16
     };
 
     $scope.color1 = '#1E8A8E';
@@ -63,7 +63,6 @@ angular.module('mercherLogoGeneratorApp')
         var point = new Point(0, 0);
         point.x = (this.B * other.C - other.B * this.C) / (this.A * other.B - other.A * this.B);
         point.y = (this.C * other.A - other.C * this.A) / (this.A * other.B - other.A * this.B);
-        console.log({A1: this.A, B1: this.B, C1: this.C}, {A2: other.A, B2: other.B, C2: other.C}, {X: point.x, Y: point.y});
         return point;
       };
     }
@@ -316,25 +315,25 @@ angular.module('mercherLogoGeneratorApp')
         leftLine.intersection(bottomLine),
         leftLine.intersection(topLeft5Line),
         left2Line.intersection(topLeft5Line),
-        left2Line.intersection(bottomLine),
+        left2Line.intersection(bottomLine)
       ];
       leftBottom2Polygon2.points.points = [
         left3Line.intersection(bottomLine),
         left3Line.intersection(topLeft5Line),
         left4Line.intersection(topLeft5Line),
-        left4Line.intersection(bottomLine),
+        left4Line.intersection(bottomLine)
       ];
       rightBottom1Polygon2.points.points = [
         rightLine.intersection(bottomLine),
         rightLine.intersection(topRight5Line),
         right2Line.intersection(topRight5Line),
-        right2Line.intersection(bottomLine),
+        right2Line.intersection(bottomLine)
       ];
       rightBottom2Polygon2.points.points = [
         right3Line.intersection(bottomLine),
         right3Line.intersection(topRight5Line),
         right4Line.intersection(topRight5Line),
-        right4Line.intersection(bottomLine),
+        right4Line.intersection(bottomLine)
       ];
     });
 

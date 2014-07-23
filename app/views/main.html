@@ -61,21 +61,21 @@
         </form>
     </div>
     <div class="col-md-8">
-        <svg width="{{ base.size }}" height="{{ base.size }}" id="resultImage">
-            <g fill="{{ color1 }}"  ng-if="variant == 1">
-                <polygon ng-repeat="polygon in polygonsA" points="{{ polygon.points.toString() }}" />
+        <svg ng-attr-width="{{ base.size }}" ng-attr-height="{{ base.size }}" id="resultImage">
+            <g ng-attr-fill="{{ color1 }}"  ng-if="variant == 1">
+                <polygon ng-repeat="polygon in polygonsA" ng-attr-points="{{ polygon.points.toString() }}" />
             </g>
-            <g fill="{{ color2 }}"  ng-if="variant == 1">
-                <polygon ng-repeat="polygon in polygonsB" points="{{ polygon.points.toString() }}" />
+            <g ng-attr-fill="{{ color2 }}"  ng-if="variant == 1">
+                <polygon ng-repeat="polygon in polygonsB" ng-attr-points="{{ polygon.points.toString() }}" />
             </g>
-            <g fill="{{ color1 }}"  ng-if="variant == 2">
-                <polygon ng-repeat="polygon in polygonsA2" points="{{ polygon.points.toString() }}" />
+            <g ng-attr-fill="{{ color1 }}"  ng-if="variant == 2">
+                <polygon ng-repeat="polygon in polygonsA2" ng-attr-points="{{ polygon.points.toString() }}" />
             </g>
-            <g fill="{{ color2 }}"  ng-if="variant == 2">
-                <polygon ng-repeat="polygon in polygonsB2" points="{{ polygon.points.toString() }}" />
+            <g ng-attr-fill="{{ color2 }}"  ng-if="variant == 2">
+                <polygon ng-repeat="polygon in polygonsB2" ng-attr-points="{{ polygon.points.toString() }}" />
             </g>
             <g stroke="red" stroke-width="1px" ng-if="showLines">
-                <line ng-repeat="line in lines" x1="{{ line.x1() }}" x2="{{ line.x2() }}" y1="{{ line.y1() }}" y2="{{ line.y2() }}" />
+                <line ng-repeat="line in lines" ng-attr-x1="{{ line.x1() }}" ng-attr-x2="{{ line.x2() }}" ng-attr-y1="{{ line.y1() }}" ng-attr-y2="{{ line.y2() }}" />
             </g>
         </svg>
     </div>
