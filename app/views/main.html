@@ -50,10 +50,10 @@
     <div class="col-md-8">
         <svg width="{{ base.size }}" height="{{ base.size }}" id="resultImage">
             <g fill="{{ color1 }}">
-
+                <polygon ng-repeat="polygon in polygonsA" points="{{ polygon.points.toString() }}" />
             </g>
             <g fill="{{ color2 }}">
-
+                <polygon ng-repeat="polygon in polygonsB" points="{{ polygon.points.toString() }}" />
             </g>
             <g stroke="red" stroke-width="1px" ng-if="showLines">
                 <line ng-repeat="line in lines" x1="{{ line.x1() }}" x2="{{ line.x2() }}" y1="{{ line.y1() }}" y2="{{ line.y2() }}" />
