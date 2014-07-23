@@ -38,6 +38,19 @@
                         <input type="text" id="color2Field" class="form-control" ng-model="color2">
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Variant</label>
+                    <div class="col-sm-8">
+                        <label class="radio">
+                            <input type="radio" value="1" ng-model="variant">
+                            First
+                        </label>
+                        <label class="radio">
+                            <input type="radio" value="2" ng-model="variant">
+                            Second
+                        </label>
+                    </div>
+                </div>
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" ng-model="showLines">
@@ -49,11 +62,17 @@
     </div>
     <div class="col-md-8">
         <svg width="{{ base.size }}" height="{{ base.size }}" id="resultImage">
-            <g fill="{{ color1 }}">
+            <g fill="{{ color1 }}"  ng-if="variant == 1">
                 <polygon ng-repeat="polygon in polygonsA" points="{{ polygon.points.toString() }}" />
             </g>
-            <g fill="{{ color2 }}">
+            <g fill="{{ color2 }}"  ng-if="variant == 1">
                 <polygon ng-repeat="polygon in polygonsB" points="{{ polygon.points.toString() }}" />
+            </g>
+            <g fill="{{ color1 }}"  ng-if="variant == 2">
+                <polygon ng-repeat="polygon in polygonsA2" points="{{ polygon.points.toString() }}" />
+            </g>
+            <g fill="{{ color2 }}"  ng-if="variant == 2">
+                <polygon ng-repeat="polygon in polygonsB2" points="{{ polygon.points.toString() }}" />
             </g>
             <g stroke="red" stroke-width="1px" ng-if="showLines">
                 <line ng-repeat="line in lines" x1="{{ line.x1() }}" x2="{{ line.x2() }}" y1="{{ line.y1() }}" y2="{{ line.y2() }}" />

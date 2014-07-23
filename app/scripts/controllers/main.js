@@ -20,6 +20,7 @@ angular.module('mercherLogoGeneratorApp')
     $scope.color2 = '#C5C5C5';
 
     $scope.showLines = true;
+    $scope.variant = 1;
 
     function Line(A, B, C) {
       this.A = A;
@@ -123,6 +124,18 @@ angular.module('mercherLogoGeneratorApp')
       rightBottomPolygon = new Polygon(),
       centerBottomPolygon = new Polygon();
 
+    var
+      leftTop1Polygon2 = new Polygon(),
+      leftTop2Polygon2 = new Polygon(),
+      leftTop3Polygon2 = new Polygon(),
+      leftTop4Polygon2 = new Polygon(),
+      rightTop1Polygon2 = new Polygon(),
+      rightTop2Polygon2 = new Polygon(),
+      leftBottom1Polygon2 = new Polygon(),
+      leftBottom2Polygon2 = new Polygon(),
+      rightBottom1Polygon2 = new Polygon(),
+      rightBottom2Polygon2 = new Polygon();
+
     $scope.lines = [
       leftLine,
       left2Line,
@@ -159,6 +172,21 @@ angular.module('mercherLogoGeneratorApp')
       centerTopPolygon
     ];
 
+    $scope.polygonsA2 = [
+      leftTop1Polygon2,
+      leftTop2Polygon2,
+      leftTop3Polygon2,
+      leftTop4Polygon2,
+      rightTop1Polygon2,
+      rightTop2Polygon2
+    ];
+    $scope.polygonsB2 = [
+      leftBottom1Polygon2,
+      leftBottom2Polygon2,
+      rightBottom1Polygon2,
+      rightBottom2Polygon2
+    ];
+
     $scope.$watchCollection('base', function () {
       var ltA,ltB,rtA,rtB;
 
@@ -192,6 +220,7 @@ angular.module('mercherLogoGeneratorApp')
       topRight4Line.C = - $scope.base.size * rtA + $scope.base.width * 2 + $scope.base.padding;
       topRight5Line.C = - $scope.base.size * rtA + $scope.base.width * 2 + $scope.base.padding * 2;
 
+      //FIRST
       leftTopPolygon.points.points = [
         leftLine.intersection(topLine),
         left2Line.intersection(topLeftLine),
@@ -240,6 +269,72 @@ angular.module('mercherLogoGeneratorApp')
         right3Line.intersection(topRight2Line),
         topLeft2Line.intersection(topRight2Line),
         left3Line.intersection(topLeft2Line)
+      ];
+
+      //SECOND
+      leftTop1Polygon2.points.points = [
+        leftLine.intersection(topLeftLine),
+        left2Line.intersection(topLeftLine),
+        left2Line.intersection(topLeft2Line),
+        leftLine.intersection(topLeft2Line)
+      ];
+      leftTop2Polygon2.points.points = [
+        leftLine.intersection(topLeft3Line),
+        left2Line.intersection(topLeft3Line),
+        left2Line.intersection(topLeft4Line),
+        leftLine.intersection(topLeft4Line)
+      ];
+      leftTop3Polygon2.points.points = [
+        left3Line.intersection(topLeftLine),
+        left4Line.intersection(topLeftLine),
+        left4Line.intersection(topLeft2Line),
+        left3Line.intersection(topLeft2Line)
+      ];
+      leftTop4Polygon2.points.points = [
+        left3Line.intersection(topLeft3Line),
+        left4Line.intersection(topLeft3Line),
+        left4Line.intersection(topLeft4Line),
+        left3Line.intersection(topLeft4Line)
+      ];
+      rightTop1Polygon2.points.points = [
+        left5Line.intersection(topLeftLine),
+        topLeftLine.intersection(topRightLine),
+        rightLine.intersection(topRightLine),
+        rightLine.intersection(topRight2Line),
+        topLeft2Line.intersection(topRight2Line),
+        left5Line.intersection(topLeft2Line)
+      ];
+      rightTop2Polygon2.points.points = [
+        left5Line.intersection(topLeft3Line),
+        topLeft3Line.intersection(topRight3Line),
+        rightLine.intersection(topRight3Line),
+        rightLine.intersection(topRight4Line),
+        topLeft4Line.intersection(topRight4Line),
+        left5Line.intersection(topLeft4Line)
+      ];
+      leftBottom1Polygon2.points.points = [
+        leftLine.intersection(bottomLine),
+        leftLine.intersection(topLeft5Line),
+        left2Line.intersection(topLeft5Line),
+        left2Line.intersection(bottomLine),
+      ];
+      leftBottom2Polygon2.points.points = [
+        left3Line.intersection(bottomLine),
+        left3Line.intersection(topLeft5Line),
+        left4Line.intersection(topLeft5Line),
+        left4Line.intersection(bottomLine),
+      ];
+      rightBottom1Polygon2.points.points = [
+        rightLine.intersection(bottomLine),
+        rightLine.intersection(topRight5Line),
+        right2Line.intersection(topRight5Line),
+        right2Line.intersection(bottomLine),
+      ];
+      rightBottom2Polygon2.points.points = [
+        right3Line.intersection(bottomLine),
+        right3Line.intersection(topRight5Line),
+        right4Line.intersection(topRight5Line),
+        right4Line.intersection(bottomLine),
       ];
     });
 
